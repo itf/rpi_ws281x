@@ -45,7 +45,9 @@ class _LED_Data(object):
 		# Else assume the passed in value is a number to the position.
 		else:
 			return ws.ws2811_led_set(self.channel, pos, value)
-
+        def set_values(self,values):
+                lednum=len(values)
+                return ws2811_leds_set(self.channel, lednum, values)
 
 class Adafruit_NeoPixel(object):
 	def __init__(self, num, pin, freq_hz=800000, dma=5, invert=False, brightness=255, channel=0):
@@ -109,6 +111,11 @@ class Adafruit_NeoPixel(object):
 		"""Set LED at position n to the provided 24-bit color value (in RGB order).
 		"""
 		self._led_data[n] = color
+
+	def setPixelColors(self, colors):
+		"""Set all LED colors to the provided 24-bit color value (in RGB order).
+		"""
+		self._led_data.set_values(colors)
 
 	def setPixelColorRGB(self, n, red, green, blue):
 		"""Set LED at position n to the provided red, green, and blue color.

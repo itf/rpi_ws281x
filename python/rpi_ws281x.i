@@ -41,6 +41,20 @@
         return 0;
     }
 
+    int ws2811_leds_set(ws2811_channel_t *channel, int lednum, uint32_t* colors)
+    {
+        if (lednum >= channel->count)
+        {
+            return -1;
+        }
+        int i;
+        for (i=0; i<lednum; i++){
+            channel->leds[i] = colors[i];
+        }
+
+        return 0;
+    }
+
     ws2811_channel_t *ws2811_channel_get(ws2811_t *ws, int channelnum)
     {
         return &ws->channel[channelnum];
